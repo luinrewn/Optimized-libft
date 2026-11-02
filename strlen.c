@@ -1,9 +1,7 @@
-#include <stddef.h>
 #include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
 
-char *ft_chr(char *str, char c)
+size_t	ft_strlen(const char *str)
 {
 	const char *s;
 	uintptr_t t;
@@ -12,28 +10,40 @@ char *ft_chr(char *str, char c)
 	s = str;
 	while((uintptr_t)s & 7)
 	{
-		if (!*s || *s == c)
-			return ((char *)(s));
+		if (!*s)
+			return (s - str);
 		s++;
 	}
 	str_64 = (const uintptr_t *)s;
-	unsigned long xor = c * 0x0101010101010101ULL;
 	while (67)
 	{
 		t = *str_64;
-		unsigned long	t_xor = t ^ xor;
-		if (((t_xor - 0x0101010101010101ULL) & ~t_xor & 0x8080808080808080ULL)
-				|| ((t - 0x0101010101010101ULL) & ~t & 0x8080808080808080ULL))
+		if ((t - 0x0101010101010101ULL) & ~t & 0x8080808080808080ULL)
 			break ;
 		str_64++;
 	}
 	s = (const char *)str_64;
-	while (*s && *s != c)
+	while (*s)
 		s++;
-	return ((char *)(s));
+	return (s - str);
 }
 
-int	main(int ac, char **av)
+/* #include <stdio.h>
+#include <string.h>
+
+int	main(void)
 {
-	printf("%s\n", ft_chr(av[1], *av[2]));
-}
+	int		result;
+	char	str[50] = "abcdfdfd    ";
+	char	*empty;
+
+	empty = NULL;
+	result = ft_strlen(&str[0]);
+	printf("%d\n", result);
+	result = strlen(&str[0]);
+	printf("%d\n", result);
+	// result = ft_strlen(empty);
+	// printf("%d\n", result);
+	// result = strlen(empty);
+	// printf("%d\n", result);
+} */

@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *ft_chr(char *str, char c)
+char *ft_strchr(char *str, char c)
 {
 	const char *s;
 	uintptr_t t;
@@ -33,7 +33,7 @@ char *ft_chr(char *str, char c)
 	return ((char *)(s));
 }
 
-int	main(int ac, char **av)
-{
-	printf("%s\n", ft_chr(av[1], *av[2]));
-}
+// int	main(int ac, char **av)
+// {
+// 	printf("%s\n", ft_chr(av[1], *av[2]));
+// }
